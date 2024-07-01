@@ -1,0 +1,55 @@
+{"questions": [
+	{
+        "id": "1",
+		"q": "Question 1: Thomas Mann wrote which novel?",
+		"answers": [
+			{"value": "Answer 1: The Plague", "is_correct": false},
+			{"value": "Answer 2: The Magic Mountain", "is_correct": true},
+			{"value": "Answer 3: Der Untertan", "is_correct": false}
+		]
+	},
+	{
+        "id": "2",
+		"q": " Question 2: Napoleon was finally defeated at the Battle of?",
+		"answers": [
+			{"value": "Answer 1: Waterloo", "is_correct": false},
+			{"value": "Answer 2: Marengo", "is_correct": false},
+			{"value": "Answer 3: Austerlitz", "is_correct": true}
+		]
+	},
+    {
+        "id": "3",
+		"q": "Question 3: Sound travels through the air at what speed?",
+		"answers": [
+			{"value": "Answer 1: 33 km/h", "is_correct": false},
+			{"value": "AAnswer 2: 330 m/s", "is_correct": true},
+			{"value": "Answer 3: 3300 m/s", "is_correct": false}
+		]
+	},
+	{
+        "id": "4",
+		"q": " Question 4: Which invention did Thomas Alva Edison not make?",
+		"answers": [
+			{"value": "Answer 1: The light bulb", "is_correct": false},
+			{"value": "Answer 2: The phonograph", "is_correct": false},
+			{"value": "Answer 3: The Enigma", "is_correct": true}
+		]
+	},
+    {
+        "id": "5",
+		"q": " Question 5: Which architect called himself Le Corbusier?",
+		"answers": [
+			{"value": "Answer 1: Charles-Edouard Jaenneret-Gris", "is_correct": false},
+			{"value": "Answer 2: Frank Wrigth", "is_correct": false},
+			{"value": "Answer 3: Mies van der Rohe", "is_correct": true}
+		]
+	}
+], "results": {
+	"questions": [
+		{"percent": 40, "average": 4500, "minimum": 1500, "maximum": 9600},
+		{"percent": 50, "average": 4500, "minimum": 1500, "maximum": 9600},
+		{"percent": 60, "average": 4500, "minimum": 1500, "maximum": 9600},
+		{"percent": 20, "average": 4500, "minimum": 1500, "maximum": 9600},
+		{"percent": 10, "average": 4500, "minimum": 1500, "maximum": 9600}
+	]}
+}
