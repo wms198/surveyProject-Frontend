@@ -21,7 +21,7 @@ const BlogDetails = () => {
     
     const nextClick = () => {
         const endTimer = Date.now();
-        fetch("http://localhost:8000/answer", {
+        fetch("http://localhost:8000/answers", {
             method: 'POST',
             body: JSON.stringify({
                 "user": user,
