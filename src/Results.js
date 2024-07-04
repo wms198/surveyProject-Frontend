@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 const Results = () => {
 
-    const { data :results, isPending, error } = useFetch("http://localhost:8000/results/");
+    const { data :results, isPending, error } = useFetch("http://localhost:8080/api/v1/results");
 
 
     return ( 
@@ -19,10 +19,10 @@ const Results = () => {
                 <th>Minimum</th>
                 <th>Maximum</th>
                 </thead>
-                {!isPending && results.questions.map((d, i) => (
+                {!isPending && results.map((d, i) => (
                     <tr>
-                    <td>{i + 1}</td>
-                    <td>{d.percent}</td>
+                    <td title={d.question.questionContent}>{i + 1}</td>
+                    <td>{d.percentage.toFixed(2)} % </td>
                     <td>{d.average}</td>
                     <td>{d.minimum}</td>
                     <td>{d.maximum}</td>

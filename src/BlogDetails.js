@@ -8,7 +8,7 @@ import { UserContext, QuizContext } from './App';
 const BlogDetails = () => {
     const startTimer = Date.now();
 
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const { quiz } = useContext(QuizContext);
     const { id } = useParams();
     //const { data :blog, isPending, error } = useFetch("http://localhost:8000/questions/" + id);
@@ -18,21 +18,26 @@ const BlogDetails = () => {
 
     console.log("quiz :", quiz);
     useEffect(() => {
-        if(quiz.lenght === parseInt(id)){
+        console.log(quiz.length < parseInt(id), quiz.length, parseInt(id));
+        if(quiz.length < parseInt(id)){
             history.push('/thankyou');
         }
-    }, []);
-    if(quiz.lenght === parseInt(id))
-        return
+    });
+    if(quiz.length < parseInt(id))
+        return "...";
+
     const question = quiz[id - 1];
     const nextClick = (option) => {
         const endTimer = Date.now();
-        fetch("http://localhost:8000/answers", {
+        fetch("http://localhost:8080/api/v1/answer", {
             method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({
                 "user": user,
                 //"question": question.id,
-                "answer": option,
+                "option": option,
                 "duration": endTimer - startTimer                 
             })
         });

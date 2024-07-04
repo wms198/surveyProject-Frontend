@@ -114,3 +114,10 @@ input.wrongPassword{
   border-color: red;
 }
 
+input.okay{
+  background-color : rgb(208, 255, 208); 
+}
+
+input.notOkay{
+  background-color : rgb(255, 215, 205); 
+}
