@@ -12,14 +12,18 @@ import { createContext, useState } from 'react';
 import ReactDOM from "react-dom/client";
 import { useLocation } from "react-router-dom";
 export const UserContext = createContext(null);
+export const QuizContext = createContext(null);
 
 function App() {
 
   const [user, setUser] = useState(null);
+  const [quiz, setQuiz] = useState(null);
   const location = useLocation();
   let isNavbarHidden = location.pathname.includes("quiz");
+
   return (
       <UserContext.Provider value={{ user: user, setUser: setUser }}>
+      <QuizContext.Provider value={{ quiz: quiz, setQuiz: setQuiz }}>
 
       <div className="App">
          {!isNavbarHidden && <Navbar/>}
@@ -52,6 +56,7 @@ function App() {
             </Switch>
           </div>
       </div>
+      </QuizContext.Provider>
       </UserContext.Provider>
   );
 }

@@ -14,11 +14,12 @@ const useFetch = (url) => {
                  if(!res.ok){
                      throw Error('could not fetch the data for that resource');
                  }
-                 console.log(res.clone().json());
+                 console.log("useFetch response:", res.clone().json());
                  return res.json();
              })
              .then((data) => {
                  setData(data);
+                 console.log("useFetch data:", data);
                  setIsPending(false);
                  setError(null);
              })
