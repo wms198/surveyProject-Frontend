@@ -2,9 +2,10 @@ import useFetch from "./useFetch";
 import { useState } from "react";
 
 import logo from "./edit.png";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 const EditQquestions = () => {
 
-    const { data : showquestion, isPending, error} = useFetch("http://localhost:8000/questions" );
+    const { data : showquestion, isPending, error} = useFetch("http://localhost:8080/api/v1/questions" );
     const [questionsJson, setquetionsJson] = useState("");
     const [isSaved, setIsSaved] = useState(false);
 
@@ -17,7 +18,7 @@ const EditQquestions = () => {
         console.log(newQuestions);
         setIsSaved(true);
         newQuestions.map(question =>{
-            fetch("http://localhost:8000/questions/" + question.id, {
+            fetch("http://localhost:8080/api/v1/questions" + question.id, {
                 method: "PATCH",
                 body: JSON.stringify(question)
                
@@ -43,15 +44,16 @@ const EditQquestions = () => {
             }
             {!isPending && showquestion.map(thisQuestions => (
                 <div className="blog-preview" key={showquestion.id} >
-                <h2>{ thisQuestions.id }</h2>
-                <p>{ thisQuestions.q }</p>
-                {thisQuestions.answers.map(thisAnswer =>(
+                    <Link to ={`/questionBlogDetail/${thisQuestions.id}`}>
+                    <h2>{ thisQuestions.id }</h2>
+                    <p>{ thisQuestions.questionContent }</p>
+                {thisQuestions.options.map(thisAnswer =>(
                     <div>
                     <span>{thisAnswer.value}</span>
-                    <input type="checkbox" checked={thisAnswer.is_correct}/>
+                    <input type="checkbox" checked={thisAnswer.isCorrect}/>
                     </div>
                 ))}
-
+                    </Link>
                 </div>
             ))}
         </div>

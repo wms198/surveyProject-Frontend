@@ -52,12 +52,12 @@
 }
 
 /* blog details page */
-.blog-details h2 {
+.blog-details h2, .questionBlogDetail h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 10px;
 }
-.blog-details div {
+.blog-details div, .questionBlogDetail div{
   margin: 20px 0;
 }
 .blog-details button, .thankyou button, .addidPage button{

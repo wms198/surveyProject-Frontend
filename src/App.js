@@ -7,6 +7,7 @@ import AddidPage from './AddidPage';
 import ThankyouPage from './ThankyouPage';
 import Results from './Results';
 import EditQquestions from './EditQquestions';
+import QuestionBlogDetail from './QuestionBlogDetail';
 import NotFound from './NotFound';
 import { createContext, useState } from 'react';
 import ReactDOM from "react-dom/client";
@@ -41,13 +42,16 @@ function App() {
               <Route path="/start">
                 <AddidPage />
               </Route>
+              <Route path = "/questionBlogDetail/:id">
+                < QuestionBlogDetail />
+              </Route>
               <Route path="/thankyou">
                 <ThankyouPage />
               </Route>
               <Route path="/results">
                 <Results />
               </Route>
-              <Route pathe = "/editQquestions">
+              <Route path = "/editQquestions">
                 < EditQquestions />
               </Route>
               <Route path="*">
