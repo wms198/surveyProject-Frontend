@@ -143,7 +143,7 @@ const QuestionBlogDetail = () => {
                             <input value = {addNewoption} onChange={(e)=>{setaddNewoption(e.target.value)}}/>
                             <button onClick={addOption}>Add</button>
                         </div>
-                        <button>Edit</button>
+                        <button>Save</button>
                     </form>
                 </article>
             )}

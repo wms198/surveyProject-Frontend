@@ -32,10 +32,19 @@ const EditQquestions = () => {
 
     }
 
+    const deleteQuestion=(e, id) =>{
+        fetch("http://localhost:8080/api/v1/questions/" + id,{
+            method: 'DELETE'
+        })
+        .then(
+            history.push("/editQquestions")
+        );
+    }
+
     return ( 
         <form className="">
             {!isPending && showquestion.map(thisQuestions => (
-                <div className="blog-preview" key={showquestion.id} >
+                <div className="blog-preview" key={thisQuestions.id} >
                     <Link to ={`/questionBlogDetail/${thisQuestions.id}`}>
                     <h2>{ thisQuestions.id }</h2>
                     <p>{ thisQuestions.questionContent }</p>
@@ -52,8 +61,11 @@ const EditQquestions = () => {
                     ))}
                     </ol>
                     </Link>
+                    <button onClick = { (e)=>{deleteQuestion(e, thisQuestions.id)} }>Delete</button>
                 </div>
+
             ))}
+
             
             <div className="blog-preview" key="0" >
                 <h2>New Question</h2>
