@@ -11,8 +11,6 @@ const BlogDetails = () => {
     const { user } = useContext(UserContext);
     const { quiz } = useContext(QuizContext);
     const { id } = useParams();
-    //const { data :blog, isPending, error } = useFetch("http://localhost:8000/questions/" + id);
-    //const { data :question, isPending, error } = useFetch("http://localhost:8080/api/v1/questions/" + id)
     const history = useHistory();
 
 

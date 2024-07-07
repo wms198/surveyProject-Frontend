@@ -1,62 +1,67 @@
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "./useFetch";
 import { useState } from "react";
 
 import logo from "./edit.png";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
+
 const EditQquestions = () => {
 
     const { data : showquestion, isPending, error} = useFetch("http://localhost:8080/api/v1/questions" );
-    const [questionsJson, setquetionsJson] = useState("");
+    const [newQuestion, setNewQuestion] = useState("");
     const [isSaved, setIsSaved] = useState(false);
+    const history = useHistory();
 
-    
-    const saveJson = () => {
-
-        console.log("json string:", questionsJson);
-        const newQuestions = JSON.parse(questionsJson);
-
-        console.log(newQuestions);
-        setIsSaved(true);
-        newQuestions.map(question =>{
-            fetch("http://localhost:8080/api/v1/questions" + question.id, {
-                method: "PATCH",
-                body: JSON.stringify(question)
-               
-            }).then(()=>{
-                   
-            });
+    const addNewQuewstion = (e)=>{
+        
+        e.preventDefault();
+        fetch("http://localhost:8080/api/v1/questions", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({"questionContent": newQuestion})
+        })
+        .then(resp => {
+            return resp.json();
+        })
+        .then(newQuestionBody =>{
+            history.push("/questionBlogDetail/" + newQuestionBody.id); 
         });
-       
+
     }
 
     return ( 
-        <div className="home">
-            {!isPending &&
-            <div>
-            <textarea onChange={(e)=>{setquetionsJson(e.target.value);setIsSaved(false)}} rows={20} cols={83} defaultValue={JSON.stringify(showquestion, null, 2)}>
-            </textarea>
-            <button onClick={saveJson}>Save</button>
-            </div>}
-            { isSaved &&
-            <div>
-                <span>Saved! </span><a href="/">Go back to Homepage</a>
-            </div>
-            }
+        <form className="">
             {!isPending && showquestion.map(thisQuestions => (
                 <div className="blog-preview" key={showquestion.id} >
                     <Link to ={`/questionBlogDetail/${thisQuestions.id}`}>
                     <h2>{ thisQuestions.id }</h2>
                     <p>{ thisQuestions.questionContent }</p>
-                {thisQuestions.options.map(thisAnswer =>(
-                    <div>
-                    <span>{thisAnswer.value}</span>
-                    <input type="checkbox" checked={thisAnswer.isCorrect}/>
-                    </div>
-                ))}
+                    <ol>
+                    {thisQuestions.options.map(thisAnswer =>(
+                        <li class="">
+                            {thisAnswer.value}
+                            <input 
+                                class="checkmark"
+                                defaultChecked={thisAnswer.isCorrect}
+                                type="radio"
+                            />
+                            </li>
+                    ))}
+                    </ol>
                     </Link>
                 </div>
             ))}
-        </div>
+            
+            <div className="blog-preview" key="0" >
+                <h2>New Question</h2>
+                <input value={newQuestion} onChange={(e)=>{setNewQuestion(e.target.value)}}/>
+                <button onClick={addNewQuewstion}>Add</button>
+              
+            </div>
+        </form>
         );
 }
 export default EditQquestions;

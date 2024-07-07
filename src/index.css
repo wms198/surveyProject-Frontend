@@ -57,7 +57,7 @@
   color: #f1356d;
   margin-bottom: 10px;
 }
-.blog-details div, .questionBlogDetail div{
+.blog-details div{
   margin: 20px 0;
 }
 .blog-details button, .thankyou button, .addidPage button{
@@ -70,28 +70,28 @@
 }
 
 /* create new blog form */
-.create, .not-found{
+.create, .not-found, .questionBlogDetail{
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
 }
-.create label {
+.create label, .questionBlogDetail label {
   text-align: left;
   display: block;
 }
-.create h2 {
+.create h2, .questionBlogDetail h2{
   font-size: 20px;
   margin-bottom: 30px;
 }
-.create input, .create textarea, .create select {
-  width: 100%;
+.create input, .create textarea, .create select, .questionBlogDetail input, .questionBlogDetail textarea, .questionBlogDetail select {
+  width: 85%;
   padding: 6px 10px;
-  margin: 10px 0;
+  margin: 10px 0 0 10px;
   border: 1px solid #ddd;
   box-sizing: border-box;
-  display: block;
+  
 }
-.create button, .home button {
+.create button, .home button, .questionBlogDetail button {
   background: #f1356d;
   color: #fff;
   border: 0;
@@ -120,4 +120,40 @@ input.okay{
 
 input.notOkay{
   background-color : rgb(255, 215, 205); 
+}
+.questionBlogDetail input[type="checkbox"],
+.questionBlogDetail input[type="radio"]{
+  display: inline;
+  width: 20%;
+  padding-top: 0;
+}
+
+input[type="radio"].checkmark{
+   appearance: none;
+   border: 1px solid #d3d3d3;
+   width: 22px;
+   height: 22px;
+   content: none;
+   outline: none;
+   margin: 5px 0 0 0;
+   top: 4px;
+   position: relative;
+   left: 10px;
+}
+
+input[type="radio"]:checked.checkmark {
+  appearance: none;
+  outline: none;
+  padding: 0;
+  content: none;
+  border: none;
+}
+
+input[type="radio"]:checked.checkmark::before{
+  position: absolute;
+  color: green !important;
+  content: "\00A0\2713\00A0" !important;
+  border: 1px solid #d3d3d3;
+  font-weight: bolder;
+  font-size: 16px;
 }
