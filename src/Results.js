@@ -41,6 +41,7 @@ const Results = () => {
                         options = {{
                             plugins: {
                                 title: {
+                                    color: 'black',
                                     display: true,
                                     align: "start",
                                     text: "Value by percentage",
@@ -49,7 +50,6 @@ const Results = () => {
                                         family: "Quicksand",
                                     },
                                 },
-
                             },
                             scales:{
                                 y:{max: 100}

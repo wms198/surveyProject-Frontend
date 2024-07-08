@@ -102,44 +102,45 @@ const QuestionBlogDetail = () => {
             { questionDetail && (
                 <article>
                     <form onSubmit={onSubmit}>
-                        <label> Question:</label>
-                        <button onClick={deleteQuestion}>Delete</button>
-                        <input
-                            name="content"
-                            type="text"
-                            required
-                            defaultValue={ questionDetail.questionContent }
-                        />
+                        <div className="blog-preview">
+                            <label> Question:</label>
+                            
+                            <input
+                                name="content"
+                                type="text"
+                                required
+                                defaultValue={ questionDetail.questionContent }
+                            />
+                        </div>
+                        <div className="blog-preview">
+                            <label>Options:</label>
+                                <ol>
+                                    { questionDetail.options.map((thisOption, i) => (
+                                        <li key={thisOption.id}>
+                                            <input type="hidden" defaultValue={thisOption.id} name="option_id"/>
+                                            <input
+                                                defaultValue={thisOption.value}
+                                                name="option" 
+                                            />
+                                            <button onClick={(e)=>{deleteOption(e, thisOption.id)}}>Delete</button>
+                                                     
+                                            <div>
+                                                <span>Is correct?</span>
+                                                <input
+                                                    class="checkmark"
+                                                    type="radio"
+                                                    name="isCorrect"
+                                                    value={thisOption.id}
+                                                    defaultChecked={thisOption.isCorrect}
+                                                />
+                                            </div>
+                                            <input type="hidden" name="separator" value="foo"/>
+                                        </li>
+                                    ))}    
+                                </ol>
+                                </div>
                         
-                        <label>Options:</label>
-                        
-                        <ol>
-                            { questionDetail.options.map((thisOption, i) => (
-                                <li key={thisOption.id}>
-                                    <input type="hidden" defaultValue={thisOption.id} name="option_id"/>
-                                    <input
-                                        defaultValue={thisOption.value}
-                                        name="option" 
-                                    />
-                                    <button onClick={(e)=>{deleteOption(e, thisOption.id)}}>Delete</button>
-                                   
-                                    <div>
-                                        <span>Is correct?</span>
-                                        <input
-                                            class="checkmark"
-                                            type="radio"
-                                            name="isCorrect"
-                                            value={thisOption.id}
-                                            defaultChecked={thisOption.isCorrect}
-                                        />
-                                    </div>
-
-                                    <input type="hidden" name="separator" value="foo"/>
-                                </li>
-                            ))}    
-                        </ol>
-
-                        <div>
+                        <div className="blog-preview">
                             <input value = {addNewoption} onChange={(e)=>{setaddNewoption(e.target.value)}}/>
                             <button onClick={addOption}>Add</button>
                         </div>

@@ -36,24 +36,24 @@ const EditQquestions = () => {
         fetch("http://localhost:8080/api/v1/questions/" + id,{
             method: 'DELETE'
         })
-        .then(
-            history.push("/editQquestions")
-        );
+        .then(resp => {
+            window.location.reload();
+        });
     }
 
     return ( 
         <form className="">
-            {!isPending && showquestion.map(thisQuestions => (
+            {!isPending && showquestion.map((thisQuestions, i) => (
                 <div className="blog-preview" key={thisQuestions.id} >
                     <Link to ={`/questionBlogDetail/${thisQuestions.id}`}>
-                    <h2>{ thisQuestions.id }</h2>
+                    <h2>{ i + 1 }</h2>
                     <p>{ thisQuestions.questionContent }</p>
                     <ol>
                     {thisQuestions.options.map(thisAnswer =>(
-                        <li class="">
+                        <li key={"option_" + thisAnswer.id}>
                             {thisAnswer.value}
                             <input 
-                                class="checkmark"
+                                className="checkmark"
                                 defaultChecked={thisAnswer.isCorrect}
                                 type="radio"
                             />
@@ -61,7 +61,10 @@ const EditQquestions = () => {
                     ))}
                     </ol>
                     </Link>
-                    <button onClick = { (e)=>{deleteQuestion(e, thisQuestions.id)} }>Delete</button>
+                    <span className="material-symbols-outlined pull-right" onClick = { (e)=>{deleteQuestion(e, thisQuestions.id)} }>
+                    delete
+                    </span>
+                    <p className="clear"></p>
                 </div>
 
             ))}
