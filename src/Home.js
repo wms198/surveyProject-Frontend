@@ -13,9 +13,13 @@ const Home = () => {
     
 
     return ( 
-        <div className="home">
-            <h3>Welcome, let's start.</h3>
-            <button onClick={handelClick}>Next</button>
+        <div className="home container">
+            <div className="addMarginBotton">
+                <h1>Welcome, let's start.</h1>
+            </div>
+            <div>
+                <button onClick={handelClick}>Next</button>
+            </div>
         </div>
      );
 }

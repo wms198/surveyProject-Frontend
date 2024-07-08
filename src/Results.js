@@ -1,19 +1,38 @@
-
 import useFetch from "./useFetch";
 import React from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Bar, Line } from "react-chartjs-2";
+import back from "./back.png";
+import next from "./next.png";
 
 const Results = () => {
 
     const { data :results, isPending, error } = useFetch("http://localhost:8080/api/v1/results");
+    const back = require('./back.png');
+    const next = require('./next.png');
+    const history = useHistory();
 
+    const precedingPage =() =>{
+        history.push('/create');
+    }
 
+    const thankyouPage =() =>{
+        history.push("/thankyou");
+    }
    
 
     return ( 
         <div>
-            <h1>Results</h1>
+            <div className="pic">
+                <div>
+                    <img src = { back } height="35" width="35" onClick={precedingPage}/>
+                </div>
+                <div>
+                    <img src = { next } height="35" width="35" onClick={thankyouPage}/>
+                </div>
+            </div>
+            <h1 style={{color: "#f1356d"}}>Results</h1>
             <table>
                 <thead>
                 <th>Question</th>
@@ -41,7 +60,7 @@ const Results = () => {
                         options = {{
                             plugins: {
                                 title: {
-                                    color: 'black',
+                                    color: '#f1356d',
                                     display: true,
                                     align: "start",
                                     text: "Value by percentage",
@@ -85,18 +104,21 @@ const Results = () => {
                                 data: results.map((resultRow) => resultRow.maximum),
                                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                                 borderColor: 'rgba(255, 99, 132, 0.5)',
+                                borderWidth: 1.8,   
                             },
                             {    
                                 label: "Average",
                                 data: results.map((resultRow) => resultRow.average),
                                 backgroundColor: 'rgba(75, 192, 192, 0.5)',
                                 borderColor: 'rgba(75, 192, 192, 0.5)',
+                                borderWidth: 1.8,
                             },
                             {
                                 label: "Minimum",
                                 data: results.map((resultRow) => resultRow.minimum),
                                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                                 borderColor: 'rgba(54, 162, 235, 0.5)',
+                                borderWidth: 1.8,
                             }],
 
                         }}
@@ -108,6 +130,7 @@ const Results = () => {
                             },
                             plugins: {
                                 title: {
+                                    color: '#f1356d',
                                     display: true,
                                     align: "start",
                                     text: "Value by milliseconds",

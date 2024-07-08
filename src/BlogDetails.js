@@ -52,10 +52,8 @@ const BlogDetails = () => {
                     <div>{ startTimer }</div>
                     <h2>{ question.questionContent }</h2>
                     {question.options.map((option, i) => (
-                        <button onClick={()=>nextClick(option.id)} key={i}>{option.value}</button>
+                        <button className="addMarginLeft" onClick={()=>nextClick(option.id)} key={i}>{option.value}</button>
                     ))}  
-                    <h1>hello</h1>
-                    <p>{user}</p>
                 </article>
                
             )}

@@ -2,10 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 /* base styles */
 * {
-  margin: 0;
   font-family: "Quicksand";
   color: #333;
 }
+.container{
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  
+}
+.addMarginBotton{
+  margin: 0,0,30px,0;
+}
+
 .navbar {
   padding: 20px;
   display: flex;
@@ -20,12 +29,12 @@
 .navbar .links {
   margin-left: auto;
 }
-.navbar a {
+.navbar a, .goback a {
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
 }
-.navbar a:hover, .not-found a:hover{
+.navbar a:hover, .not-found a:hover, .goback a:hover{
   color: #f1356d;
 }
 .content {
@@ -42,9 +51,9 @@
 .blog-preview:hover {
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
 }
-.blog-preview h2, .not-found h2{
+.blog-preview h2, .not-found h2, .create h2{
   font-size: 20px;
-  color: #f1356d;
+  color: rgb(241, 53, 109);
   margin-bottom: 8px;
 }
 
@@ -70,6 +79,10 @@
   cursor: pointer;
 }
 
+.blog-details button:hover, .create button:hover, .thankyou button:hover, .addidPage button:hover, .home button:hover, .questionBlogDetail button:hover{
+  background: rgba(241, 53, 109,0.8);
+}
+
 /* create new blog form */
 .create, .not-found, .questionBlogDetail{
   max-width: 400px;
@@ -79,13 +92,14 @@
 .create label, .questionBlogDetail label {
   text-align: left;
   display: block;
+  margin-top: 15px;
 }
 .create h2, .questionBlogDetail h2{
   font-size: 20px;
   margin-bottom: 30px;
 }
 .create input, .create textarea, .create select, .questionBlogDetail input, .questionBlogDetail textarea, .questionBlogDetail select {
-  width: 85%;
+  width: 80%;
   padding: 6px 10px;
   margin: 10px 0 0 10px;
   border: 1px solid #ddd;
@@ -106,6 +120,7 @@
 }
 .pull-right{
   float: right;
+  cursor: pointer;
 }
 .clear{
   clear: both;
@@ -148,6 +163,7 @@ input[type="radio"]:checked.checkmark {
   padding: 0;
   content: none;
   border: none;
+  cursor: pointer;
 }
 
 input[type="radio"]:checked.checkmark::before{
@@ -157,5 +173,23 @@ input[type="radio"]:checked.checkmark::before{
   border: 1px solid #d3d3d3;
   font-weight: bolder;
   font-size: 16px;
+}
+
+.addMarginLeft{
+  margin-left: 10px;
+}
+
+.pic{
+display: flex;
+justify-content: space-around;
+}
+
+.pic:hover{
+  cursor: pointer;
+  size: 10px;
+}
+
+.addMarginTop{
+  margin-top: 12px;
 }
 

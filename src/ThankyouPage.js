@@ -14,8 +14,8 @@ const ThankyouPage = () => {
         setUser(null);
     }, []);
     return (  
-        <div className="thankyou">
-            <h2>Thank you for your time.</h2>
+        <div className="thankyou container">
+            <h1>Thank you for your time.</h1>
             <button onClick = { backToHomepage }>Back to Homepage</button>
         </div>
     );

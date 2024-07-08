@@ -1,14 +1,14 @@
 import { Link, useParams, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "./useFetch";
 import { useState } from "react";
+import { hover } from "@testing-library/user-event/dist/hover";
+import back from "./back.png";
 
 const QuestionBlogDetail = () => {
     const { id } = useParams();
     const { data: questionDetail, error, isPending } = useFetch('http://localhost:8080/api/v1/questions/' + id);
-
-   
     const [addNewoption, setaddNewoption] = useState("");
-   
+    const back = require('./back.png');
     const history = useHistory();
 
 
@@ -73,15 +73,6 @@ const QuestionBlogDetail = () => {
         });
     }
 
-    const deleteQuestion=(e) =>{
-        fetch("http://localhost:8080/api/v1/questions/" + questionDetail.id,{
-            method: 'DELETE'
-        })
-        .then(
-            history.push("/editQquestions")
-        );
-    }
-
     const deleteOption = (e, id) =>{
         e.preventDefault();
         fetch("http://localhost:8080/api/v1/options/" + id,{
@@ -93,10 +84,20 @@ const QuestionBlogDetail = () => {
       
     }
 
+    const goToThankUPage = () => {
+        history.push("/thankyou");
+    }
+    const precedingPage =() =>{
+        history.push('/editQquestions');
+    }
 
     return ( 
-        <div className="questionBlogDetail">
-            <Link to="/editQquestions/">Back</Link>
+        <div className="questionBlogDetail goback">
+            <div className="pic">
+                <div>
+                    <img src = { back } height="35" width="35" onClick={precedingPage}/>
+                </div>
+            </div>
             { isPending && <div>Load...</div>}
             { error && <div>{ error }</div>}
             { questionDetail && (
@@ -122,8 +123,9 @@ const QuestionBlogDetail = () => {
                                                 defaultValue={thisOption.value}
                                                 name="option" 
                                             />
-                                            <button onClick={(e)=>{deleteOption(e, thisOption.id)}}>Delete</button>
-                                                     
+                                            <span className="material-symbols-outlined pull-right addMarginTop" onClick = { (e)=>{deleteOption(e, thisOption.id)} }>
+                                                delete
+                                            </span>       
                                             <div>
                                                 <span>Is correct?</span>
                                                 <input
@@ -142,9 +144,9 @@ const QuestionBlogDetail = () => {
                         
                         <div className="blog-preview">
                             <input value = {addNewoption} onChange={(e)=>{setaddNewoption(e.target.value)}}/>
-                            <button onClick={addOption}>Add</button>
+                            <button className="addMarginLeft" onClick={addOption}>Add</button>
                         </div>
-                        <button>Save</button>
+                        <button onClick={() =>goToThankUPage()}>Save</button>
                     </form>
                 </article>
             )}

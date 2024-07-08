@@ -46,7 +46,7 @@ const AddidPage = () => {
                 value={ user || "" }
                 onChange = { (e) => checkUser(e.target.value)}
             />
-            <button onClick={start}>START</button>
+            <button  className="addMarginLeft" onClick={start}>START</button>
             {fetchedUser && <p>Sorry you already took the test, { user }!</p>}
             <p style={{display: 'none'}}> { JSON.stringify(quiz) } </p>
         </div>

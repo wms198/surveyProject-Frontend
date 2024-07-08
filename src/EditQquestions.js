@@ -70,10 +70,10 @@ const EditQquestions = () => {
             ))}
 
             
-            <div className="blog-preview" key="0" >
+            <div className="blog-preview thankyou" key="0" >
                 <h2>New Question</h2>
                 <input value={newQuestion} onChange={(e)=>{setNewQuestion(e.target.value)}}/>
-                <button onClick={addNewQuewstion}>Add</button>
+                <button className="addMarginLeft" onClick={addNewQuewstion}>Add</button>
               
             </div>
         </form>

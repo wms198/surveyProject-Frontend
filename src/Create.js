@@ -23,7 +23,7 @@ const Create = () => {
     
     return ( 
         <div className="create">
-            <h2>Teacher System</h2>
+            <h1>Teacher System</h1>
                 <label htmlFor = "pass" >Enter password:</label>
 
                 <input
@@ -47,8 +47,14 @@ const Create = () => {
                     onChange={() =>
                         setShowPassword((prev) => !prev)
                      }/>
-                <button className="pull-left" onClick={()=>{onAny();onResults()}}>Results</button>
-                <button className="pull-right" onClick={()=>{onAny();onQuestions()}}>Edit Questions</button>  
+                <div>
+                    <div>
+                        <button className="pull-left" onClick={()=>{onAny();onResults()}}>Results</button>
+                    </div>
+                    <div>
+                        <button className="pull-right" onClick={()=>{onAny();onQuestions()}}>Edit Questions</button>  
+                    </div>    
+                </div>
                 <div className="clear">
                     {!isPasswordCorrect && <span>Password is wrong!</span>}
                 </div>
