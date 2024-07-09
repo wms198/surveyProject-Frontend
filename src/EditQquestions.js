@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "./useFetch";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import logo from "./edit.png";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
@@ -17,6 +17,7 @@ const EditQquestions = () => {
         
         e.preventDefault();
         fetch("http://localhost:8080/api/v1/questions", {
+            credentials: "include",
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -34,16 +35,22 @@ const EditQquestions = () => {
 
     const deleteQuestion=(e, id) =>{
         fetch("http://localhost:8080/api/v1/questions/" + id,{
-            method: 'DELETE'
+            method: 'DELETE',
+            credentials: "include",
         })
         .then(resp => {
             window.location.reload();
         });
     }
+    useEffect(()=>{
+        if(error === "redirect")
+            history.push('/create');
+
+    });
 
     return ( 
         <form className="">
-            {!isPending && showquestion.map((thisQuestions, i) => (
+            {(!isPending && !error) && showquestion.map((thisQuestions, i) => (
                 <div className="blog-preview" key={thisQuestions.id} >
                     <Link to ={`/questionBlogDetail/${thisQuestions.id}`}>
                     <h2>{ i + 1 }</h2>

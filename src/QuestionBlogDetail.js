@@ -1,6 +1,6 @@
 import { Link, useParams, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "./useFetch";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { hover } from "@testing-library/user-event/dist/hover";
 import back from "./back.png";
 
@@ -45,6 +45,7 @@ const QuestionBlogDetail = () => {
         });
         console.log(newQuestion);
         fetch("http://localhost:8080/api/v1/questions/" + questionDetail.id, {
+            credentials: "include",
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
@@ -56,6 +57,7 @@ const QuestionBlogDetail = () => {
     
     const addOption =(e) =>{
         fetch("http://localhost:8080/api/v1/options",{
+            credentials: "include",
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -76,7 +78,8 @@ const QuestionBlogDetail = () => {
     const deleteOption = (e, id) =>{
         e.preventDefault();
         fetch("http://localhost:8080/api/v1/options/" + id,{
-            method : "DELETE"
+            method : "DELETE",
+            credentials: "include",
         })
         .then(resp => {
             window.location.reload();
@@ -84,12 +87,13 @@ const QuestionBlogDetail = () => {
       
     }
 
-    const goToThankUPage = () => {
-        history.push("/thankyou");
-    }
     const precedingPage =() =>{
         history.push('/editQquestions');
     }
+    useEffect(()=>{
+        if(error === "redirect")
+            history.push('/create');
+    });
 
     return ( 
         <div className="questionBlogDetail goback">
@@ -146,7 +150,7 @@ const QuestionBlogDetail = () => {
                             <input value = {addNewoption} onChange={(e)=>{setaddNewoption(e.target.value)}}/>
                             <button className="addMarginLeft" onClick={addOption}>Add</button>
                         </div>
-                        <button onClick={() =>goToThankUPage()}>Save</button>
+                        <button>Save</button>
                     </form>
                 </article>
             )}

@@ -1,5 +1,5 @@
 import useFetch from "./useFetch";
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Bar, Line } from "react-chartjs-2";
@@ -20,7 +20,11 @@ const Results = () => {
     const thankyouPage =() =>{
         history.push("/thankyou");
     }
-   
+    useEffect(()=>{
+        if(error === "redirect")
+            history.push('/create');
+
+    });
 
     return ( 
         <div>
@@ -41,7 +45,7 @@ const Results = () => {
                 <th>Minimum</th>
                 <th>Maximum</th>
                 </thead>
-                {!isPending && results.map((resultRow, i) => (
+                {(!isPending && !error) && results.map((resultRow, i) => (
                     <tr>
                     <td title={resultRow.question.questionContent +" ["+ resultRow.question.id +"]"}>{i + 1}</td>
                     <td>{resultRow.percentage.toFixed(2)} % </td>
@@ -54,7 +58,7 @@ const Results = () => {
             <br/>
             <br/>
             <div className="twoCharts">
-            {!isPending && 
+            {(!isPending && !error) && 
                 <div className="chart">
                     <Bar
                         options = {{
@@ -93,7 +97,7 @@ const Results = () => {
             }
             <br/>
             <br/>
-            {!isPending && 
+            {(!isPending && !error) &&
                 <div className="chart">
                     <Line
                         data = {{
@@ -150,7 +154,7 @@ const Results = () => {
             }</div>
 
         </div>
-     );
+);
 }
  
 export default Results;
