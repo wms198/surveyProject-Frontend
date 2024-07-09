@@ -20,6 +20,29 @@ const Create = () => {
         if(checkPassword())
             history.push('/editQquestions')
     }
+
+    const login = (targetPage) => {
+        const formData = new FormData();
+        formData.append("username", "teacher");
+        formData.append("password", password);
+        fetch("http://localhost:8080/login", {
+            credentials: "include",
+            method: "POST",
+            body: formData,
+        }).then((resp)=>{
+            console.log(resp);
+            console.log(resp.url);
+            const redirectLocation = String(resp.url);
+            if(!redirectLocation.endsWith("error"))
+                history.push(targetPage)
+            else
+                setisPasswordCorrect(false);
+        }).catch((resp)=>{
+
+            console.log(resp);
+        });
+
+    }
     
     return ( 
         <div className="create">
@@ -49,10 +72,10 @@ const Create = () => {
                      }/>
                 <div>
                     <div>
-                        <button className="pull-left" onClick={()=>{onAny();onResults()}}>Results</button>
+                        <button className="pull-left" onClick={()=>{login("/results")}}>Results</button>
                     </div>
                     <div>
-                        <button className="pull-right" onClick={()=>{onAny();onQuestions()}}>Edit Questions</button>  
+                        <button className="pull-right" onClick={()=>{login("/editQuestions")}}>Edit Questions</button>  
                     </div>    
                 </div>
                 <div className="clear">
