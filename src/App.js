@@ -51,7 +51,7 @@ function App() {
               <Route path="/results">
                 <Results />
               </Route>
-              <Route path = "/editQquestions">
+              <Route path = "/editQuestions">
                 < EditQquestions />
               </Route>
               <Route path="*">

@@ -44,16 +44,21 @@ const BlogDetails = () => {
 
 
     return ( 
-        <div className="blog-details">
+        <div className="blog-details ">
             {/* isPending && <div>Load...</div>}
             { error && <div>{ error }</div>}
             {!isPending && */(
                 <article>
-                    <div>{ startTimer }</div>
-                    <h2>{ question.questionContent }</h2>
-                    {question.options.map((option, i) => (
-                        <button className="addMarginLeft" onClick={()=>nextClick(option.id)} key={i}>{option.value}</button>
-                    ))}  
+                    <div className="container">
+                        <div>
+                            <h1 style={{color: "black"}}>{ question.questionContent }</h1>
+                        </div>
+                        <div>
+                            {question.options.map((option, i) => (
+                                <button className="addMarginLeft" onClick={()=>nextClick(option.id)} key={i}>{option.value}</button>
+                            ))}  
+                        </div>
+                    </div>
                 </article>
                
             )}

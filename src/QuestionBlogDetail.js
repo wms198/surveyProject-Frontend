@@ -1,6 +1,6 @@
 import { Link, useParams, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "./useFetch";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { hover } from "@testing-library/user-event/dist/hover";
 import back from "./back.png";
 
@@ -11,11 +11,14 @@ const QuestionBlogDetail = () => {
     const back = require('./back.png');
     const history = useHistory();
 
-
     const onSubmit = (e)=>{
         console.log(e);
         e.preventDefault();
-        const data = new FormData(e.currentTarget);
+        _onSubmit(e.currentTarget);
+    }
+
+    const _onSubmit = (target)=>{
+        const data = new FormData(target);
         console.log(data);
         let newQuestion = {
             questionContent: "",
@@ -45,6 +48,7 @@ const QuestionBlogDetail = () => {
         });
         console.log(newQuestion);
         fetch("http://localhost:8080/api/v1/questions/" + questionDetail.id, {
+            credentials: "include",
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
@@ -56,6 +60,7 @@ const QuestionBlogDetail = () => {
     
     const addOption =(e) =>{
         fetch("http://localhost:8080/api/v1/options",{
+            credentials: "include",
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -76,7 +81,8 @@ const QuestionBlogDetail = () => {
     const deleteOption = (e, id) =>{
         e.preventDefault();
         fetch("http://localhost:8080/api/v1/options/" + id,{
-            method : "DELETE"
+            method : "DELETE",
+            credentials: "include",
         })
         .then(resp => {
             window.location.reload();
@@ -84,20 +90,21 @@ const QuestionBlogDetail = () => {
       
     }
 
-    const goToThankUPage = () => {
-        history.push("/thankyou");
+    const saveExit = (e) =>{
+        e.preventDefault();
+        _onSubmit(e.target.parentElement);
+        history.push('/');
     }
-    const precedingPage =() =>{
-        history.push('/editQquestions');
-    }
+    useEffect(()=>{
+        if(error === "redirect")
+            history.push('/create');
+    });
 
     return ( 
         <div className="questionBlogDetail goback">
-            <div className="pic">
-                <div>
-                    <img src = { back } height="35" width="35" onClick={precedingPage}/>
-                </div>
-            </div>
+            <Link className="pic" to="/editQuestions">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </Link>
             { isPending && <div>Load...</div>}
             { error && <div>{ error }</div>}
             { questionDetail && (
@@ -146,7 +153,8 @@ const QuestionBlogDetail = () => {
                             <input value = {addNewoption} onChange={(e)=>{setaddNewoption(e.target.value)}}/>
                             <button className="addMarginLeft" onClick={addOption}>Add</button>
                         </div>
-                        <button onClick={() =>goToThankUPage()}>Save</button>
+                        <button className="pull-left">Save</button>
+                        <button className="pull-right" onClick={saveExit}>Save and exit</button>
                     </form>
                 </article>
             )}

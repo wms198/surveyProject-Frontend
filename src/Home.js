@@ -4,6 +4,7 @@ import useFetch from './useFetch';
 import AddidPage from "./AddidPage";
 
 const Home = () => {
+    const { data :results, isPending, error } = useFetch("http://localhost:8080/logout");
     const history = useHistory();
 
     const handelClick = () =>{

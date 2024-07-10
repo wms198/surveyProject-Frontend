@@ -9,8 +9,16 @@ const useFetch = (url) => {
         const abortCont = new AbortController();
 
         setTimeout(() => {
-         fetch(url, { singel: abortCont.singel })
+         fetch(url, {
+             singel: abortCont.singel,
+             credentials: "include",
+             redirect: "manual"
+         })
              .then(res => {
+                 if(res.type === "opaqueredirect"){
+                     throw Error("redirect");
+                 }
+
                  if(!res.ok){
                      throw Error('could not fetch the data for that resource');
                  }
@@ -26,6 +34,9 @@ const useFetch = (url) => {
              .catch((err) => {
                 if(err.name === 'AbortError'){
                     console.log("fetch aborted");
+                }else if(err.name === "redirect"){
+                 setIsPending(false);
+                 setError(err.message);
                 }else{
                  setIsPending(false);
                  setError(err.message);

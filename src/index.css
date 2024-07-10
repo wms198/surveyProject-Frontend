@@ -39,7 +39,7 @@
 }
 .content {
   max-width: 600px;
-  margin: 40px auto;
+  margin: 0px auto;
   padding: 20px;
 }
 /* blog previews / list */
@@ -180,16 +180,30 @@ input[type="radio"]:checked.checkmark::before{
 }
 
 .pic{
-display: flex;
-justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
+  min-height: 30px;
+  text-decoration: none;
 }
 
-.pic:hover{
+.pic img:hover{
   cursor: pointer;
-  size: 10px;
+  height: 27px;
 }
 
 .addMarginTop{
   margin-top: 12px;
 }
 
+.pic img {
+  position: relative;
+  height: 30px;
+}
+
+.pic span:hover{
+  color: #f1356d;
+}
+
+.pic span{
+  color: black;
+}

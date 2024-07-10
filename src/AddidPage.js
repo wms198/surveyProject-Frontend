@@ -11,11 +11,11 @@ const AddidPage = () => {
 
 
     const { data :questions, isPending, error } = useFetch("http://localhost:8080/api/v1/questions")
-    useEffect(()=>{
-        console.log("questions: ", questions, !isPending);
-        if(!isPending)
-            setQuiz(questions);
-    }, [questions]);
+        useEffect(()=>{
+            console.log("questions: ", questions, !isPending);
+            if(!isPending)
+                setQuiz(questions);
+        }, [questions]);
 
     const start = () =>{ 
         if(user && quiz && !fetchedUser){
@@ -38,7 +38,7 @@ const AddidPage = () => {
 
     const history = useHistory();
     return( 
-        <div className="addidPage">
+        <div className="addidPage container">
             <h2>Enter your name</h2>
             <input 
                 required
@@ -46,7 +46,7 @@ const AddidPage = () => {
                 value={ user || "" }
                 onChange = { (e) => checkUser(e.target.value)}
             />
-            <button  className="addMarginLeft" onClick={start}>START</button>
+            <button className="addMarginLeft addMarginTop" onClick={start}>START</button>
             {fetchedUser && <p>Sorry you already took the test, { user }!</p>}
             <p style={{display: 'none'}}> { JSON.stringify(quiz) } </p>
         </div>

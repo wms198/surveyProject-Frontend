@@ -1,6 +1,6 @@
 import useFetch from "./useFetch";
-import React from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import React, { useState, useEffect } from 'react';
+import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Bar, Line } from "react-chartjs-2";
 import back from "./back.png";
@@ -20,18 +20,17 @@ const Results = () => {
     const thankyouPage =() =>{
         history.push("/thankyou");
     }
-   
+    useEffect(()=>{
+        if(error === "redirect")
+            history.push('/create');
+
+    });
 
     return ( 
         <div>
-            <div className="pic">
-                <div>
-                    <img src = { back } height="35" width="35" onClick={precedingPage}/>
-                </div>
-                <div>
-                    <img src = { next } height="35" width="35" onClick={thankyouPage}/>
-                </div>
-            </div>
+            <Link title="Edit Questions" className="pic" to="/editQuestions">
+                <span class="material-symbols-outlined">edit_note</span>  
+            </Link>
             <h1 style={{color: "#f1356d"}}>Results</h1>
             <table>
                 <thead>
@@ -41,7 +40,7 @@ const Results = () => {
                 <th>Minimum</th>
                 <th>Maximum</th>
                 </thead>
-                {!isPending && results.map((resultRow, i) => (
+                {(!isPending && !error) && results.map((resultRow, i) => (
                     <tr>
                     <td title={resultRow.question.questionContent +" ["+ resultRow.question.id +"]"}>{i + 1}</td>
                     <td>{resultRow.percentage.toFixed(2)} % </td>
@@ -54,7 +53,7 @@ const Results = () => {
             <br/>
             <br/>
             <div className="twoCharts">
-            {!isPending && 
+            {(!isPending && !error) && 
                 <div className="chart">
                     <Bar
                         options = {{
@@ -93,7 +92,7 @@ const Results = () => {
             }
             <br/>
             <br/>
-            {!isPending && 
+            {(!isPending && !error) &&
                 <div className="chart">
                     <Line
                         data = {{
@@ -150,7 +149,7 @@ const Results = () => {
             }</div>
 
         </div>
-     );
+);
 }
  
 export default Results;
